@@ -1,0 +1,24 @@
+p-card .p-card {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+p-card .p-card,
+ng-dropdown p-dropdown .p-dropdown,
+ng-jalali-datepicker ng-jalali-picker-base .p-calendar,
+ng-jalali-datepicker ng-jalali-picker-base .p-inputtext,
+ng-input-text .p-inputtext,
+ng-input-password .p-inputtext,
+ng-button p-button button.p-button {
+  border-radius: 1rem;
+}
+
+ng-checkbox .p-checkbox .p-checkbox-box {
+  border-radius: 0.5rem;
+
+  &.p-highlight .p-checkbox-icon.pi-check:before {
+    top: 8px;
+    left: 2.5px;
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+  }
+}

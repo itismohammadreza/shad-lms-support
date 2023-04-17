@@ -1,0 +1,92 @@
+<div class="container-fluid">
+  <div class="row align-items-stretch">
+    <div class="col-lg-6 mb-3">
+      <p-card>
+        <h5>میزان تکالیف مقاطع تحصیلی</h5>
+        <div class="row mt-4">
+          <div class="mt-2 col-sm-6 col-lg-4 col-xl">
+            <ng-figure title="ابتدایی" [sub]="gradeCount.elementary"></ng-figure>
+          </div>
+          <div class="mt-2 col-sm-6 col-lg-4 col-xl">
+            <ng-figure title="متوسطه اول" [sub]="gradeCount.middle"></ng-figure>
+          </div>
+          <div class="mt-2 col-sm-6 col-lg-4 col-xl">
+            <ng-figure title="متوسطه دوم" [sub]="gradeCount.high"></ng-figure>
+          </div>
+          <div class="mt-2 col-sm-6 col-lg-4 col-xl">
+            <ng-figure title="فنی و حرفه ای" [sub]="gradeCount.was"></ng-figure>
+          </div>
+          <div class="mt-2 col-sm-6 col-lg-4 col-xl">
+            <ng-figure title="کار دانش" [sub]="gradeCount.tap"></ng-figure>
+          </div>
+        </div>
+      </p-card>
+    </div>
+    <div class="col-lg-6 mb-3">
+      <p-card>
+        <h5>تکالیف</h5>
+        <div class="row mt-4">
+          <div class="col-12 mt-2">
+            <ng-figure title="ایجاد شده" layout="horizontal" sub="0"></ng-figure>
+          </div>
+        </div>
+      </p-card>
+    </div>
+    <div class="col-12">
+      <p-card>
+        <h5>تکلیف</h5>
+        <form [formGroup]="form" (ngSubmit)="onSubmitFilter()" class="form-row my-4">
+          <ng-jalali-datepicker formControlName="start_time" class="col-sm-6 col-md-4 col-xl mb-2" [showIcon]="false"
+                                [showClear]="true" label="از تاریخ"></ng-jalali-datepicker>
+          <ng-jalali-datepicker formControlName="end_time" class="col-sm-6 col-md-4 col-xl mb-2" [showIcon]="false"
+                                [showClear]="true" label="تا تاریخ"></ng-jalali-datepicker>
+          <ng-dropdown formControlName="lesson_id" class="col-sm-6 col-md-4 col-xl mb-2" label="درس"></ng-dropdown>
+          <ng-dropdown formControlName="major" class="col-sm-6 col-md-4 col-xl mb-2" label="رشته"></ng-dropdown>
+          <ng-dropdown formControlName="stage" class="col-sm-6 col-md-4 col-xl mb-2" label="پایه"></ng-dropdown>
+          <ng-dropdown formControlName="grade" class="col-sm-6 col-md-4 col-xl mb-2" label="مقطع"></ng-dropdown>
+          <ng-dropdown formControlName="gender_id" class="col-sm-6 col-md-4 col-xl mb-2" [options]="genders"
+                       label="جنسیت"></ng-dropdown>
+          <div class="d-flex align-items-center col-md-4 col-xl mb-2">
+            <ng-button
+              type="submit"
+              [full]="true"
+              appearance="outlined"
+              color="success"
+              size="md"
+              [disabled]="form.hasError('invalidDate')"
+              label="اعمال تغییرات">
+            </ng-button>
+            <ng-button
+              *ngIf="filterEnabled"
+              appearance="outlined"
+              color="danger"
+              pTooltip="حذف فیلتر"
+              tooltipPosition="top"
+              class="mr-2"
+              [rounded]="true"
+              icon="pi pi-times"
+              (onClick)="clearFilter()">
+            </ng-button>
+          </div>
+        </form>
+        <div class="row">
+          <div class="mt-2 col-sm-6 col-lg-3 col-xl">
+            <ng-figure title="بارگزاری شده" sub="0"></ng-figure>
+          </div>
+          <div class="mt-2 col-sm-6 col-lg-3 col-xl">
+            <ng-figure title="انجام شده" sub="0"></ng-figure>
+          </div>
+          <div class="mt-2 col-sm-6 col-lg-3 col-xl">
+            <ng-figure title="تصحیح شده" sub="0"></ng-figure>
+          </div>
+          <div class="mt-2 col-sm-6 col-lg-3 col-xl">
+            <ng-figure title="براساس جنسیت" sub="0"></ng-figure>
+          </div>
+          <div class="col-12 mt-5">
+            <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

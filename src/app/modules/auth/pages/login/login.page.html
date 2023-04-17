@@ -1,0 +1,32 @@
+<form class="form-row justify-content-center" [formGroup]="form">
+  <div class="p-4 p-sm-5 box shadow">
+    <h4 class="text-center mb-5">پنل مشاهده آمار LMS</h4>
+    <span class="d-block text-muted mb-4">نام کاربری و رمز عبور خود را وارد کنید</span>
+    <ng-input-text
+      class="mb-4"
+      formControlName="username"
+      inputSize="md"
+      labelPos="fix-top"
+      icon="pi pi-user"
+      label="نام کاربری"
+      [validation]="{'required':'این فیلد الزامیست.'}"
+    ></ng-input-text>
+    <ng-input-password
+      class="mb-5"
+      formControlName="password"
+      inputSize="md"
+      labelPos="fix-top"
+      [toggleMask]="true"
+      label="رمز عبور"
+      [validation]="{'required':'این فیلد الزامیست.'}"
+    ></ng-input-password>
+    <ng-button
+      [async]="true"
+      [full]="true"
+      size="lg"
+      type="submit"
+      label="ورود"
+      (onClickAsync)="onSubmit($event)"
+    ></ng-button>
+  </div>
+</form>
