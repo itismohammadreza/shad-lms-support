@@ -1,15 +1,59 @@
-<div class="main-content">
-  <p-menubar [model]="items" class="fixed-top">
-    <ng-template pTemplate="end">
-      <div class="d-flex align-items-center">
-        <ng-button size="md" class="ml-2" appearance="outlined" icon="pi pi-user" iconPos="right" label="کاربران"
-                   routerLink="/users"></ng-button>
-        <p-avatar role="button" image="assets/images/avatar.png" routerLink="/profile" size="large"
-                  shape="circle"></p-avatar>
-      </div>
-    </ng-template>
-  </p-menubar>
+<div class="main-content rtl menu-{{tempSidebarType}}"
+     [ngClass]="{
+        'sidebar-lock' : sidebarLock,
+        'sidebar-open' : sidebarVisible
+     }">
+  <nav class="navbar navbar-expand shadow-sm fixed-top justify-content-between">
+    <ng-button
+      *ngIf="!sidebarLock && tempSidebarType != 'hover' && tempSidebarType != 'horizontal'"
+      icon="pi pi-bars"
+      color="primary"
+      appearance="text"
+      (click)="toggleSidebarClick()">
+    </ng-button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav p-0 mr-auto">
+        <!--        <li class="nav-item" (click)="accountMenu.toggle($event)">-->
+        <!--          <span class="m{{ rtl ? 'l' : 'r' }}-3">{{ "Admin" }}</span>-->
+        <!--          <p-avatar shape="circle" size="large" icon="pi pi-user"></p-avatar>-->
+        <!--        </li>-->
+        <li class="nav-item">
+          <a class="nav-link text-decoration-none ng-ltr" target="_blank"
+             href="https://github.com/mohammadreza99/powell">
+            <i class="pi pi-github mr-1 align-middle"></i><span>Github</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <main>
     <ng-content></ng-content>
   </main>
+
+  <p-sidebar
+    [visible]="sidebarVisible"
+    [blockScroll]="isModalSidebar"
+    [modal]="isModalSidebar"
+    position="right"
+    [showCloseIcon]="false"
+    [closeOnEscape]="false"
+    (visibleChange)="toggleSidebar($event)">
+    <ng-template pTemplate="header">Header Content</ng-template>
+    <ng-template pTemplate="content">Body Content</ng-template>
+    <ng-template pTemplate="footer">Footer Content</ng-template>
+<!--    <ng-template pTemplate="header">-->
+<!--      <h3 class="text-center">مدرسه من</h3>-->
+<!--    </ng-template>-->
+<!--    <ng-template pTemplate="content">-->
+<!--      <p-panelMenu [multiple]="false" [model]="sidebarItems"></p-panelMenu>-->
+<!--    </ng-template>-->
+  </p-sidebar>
 </div>
+
+<p-menu
+  #accountMenu
+  [baseZIndex]="1000"
+  [popup]="true"
+  [model]="accountItems"
+></p-menu>

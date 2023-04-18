@@ -75,7 +75,7 @@ import {MenuModule} from 'primeng/menu';
 // import {DockModule} from 'primeng/dock';
 // import {MegaMenuModule} from 'primeng/megamenu';
 import {MenubarModule} from 'primeng/menubar';
-// import {PanelMenuModule} from 'primeng/panelmenu';
+import {PanelMenuModule} from 'primeng/panelmenu';
 // import {SlideMenuModule} from 'primeng/slidemenu';
 // import {StepsModule} from 'primeng/steps';
 // import {TabMenuModule} from 'primeng/tabmenu';
@@ -190,7 +190,7 @@ export const MODULES: Type<any>[] = [
   // DockModule,
   // MegaMenuModule,
   MenubarModule,
-  // PanelMenuModule,
+  PanelMenuModule,
   // SlideMenuModule,
   // StepsModule,
   // TabMenuModule,
