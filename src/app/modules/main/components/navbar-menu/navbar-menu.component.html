@@ -7,23 +7,17 @@
     <ng-button
       *ngIf="!sidebarLock && tempSidebarType != 'hover' && tempSidebarType != 'horizontal'"
       icon="pi pi-bars"
-      color="primary"
+      color="secondary"
       appearance="text"
+      size="lg"
       (click)="toggleSidebarClick()">
     </ng-button>
     <div class="collapse navbar-collapse">
-      <ul class="navbar-nav p-0 mr-auto">
-        <!--        <li class="nav-item" (click)="accountMenu.toggle($event)">-->
-        <!--          <span class="m{{ rtl ? 'l' : 'r' }}-3">{{ "Admin" }}</span>-->
-        <!--          <p-avatar shape="circle" size="large" icon="pi pi-user"></p-avatar>-->
-        <!--        </li>-->
-        <li class="nav-item">
-          <a class="nav-link text-decoration-none ng-ltr" target="_blank"
-             href="https://github.com/mohammadreza99/powell">
-            <i class="pi pi-github mr-1 align-middle"></i><span>Github</span>
-          </a>
-        </li>
-      </ul>
+      <div class="w-100 d-flex align-items-center justify-content-between">
+        <h3>عنوان</h3>
+        <p-avatar role="button" image="assets/images/avatar.png" routerLink="/profile" size="large"
+                  shape="circle"></p-avatar>
+      </div>
     </div>
   </nav>
 
@@ -39,21 +33,11 @@
     [showCloseIcon]="false"
     [closeOnEscape]="false"
     (visibleChange)="toggleSidebar($event)">
-    <ng-template pTemplate="header">Header Content</ng-template>
-    <ng-template pTemplate="content">Body Content</ng-template>
-    <ng-template pTemplate="footer">Footer Content</ng-template>
-<!--    <ng-template pTemplate="header">-->
-<!--      <h3 class="text-center">مدرسه من</h3>-->
-<!--    </ng-template>-->
-<!--    <ng-template pTemplate="content">-->
-<!--      <p-panelMenu [multiple]="false" [model]="sidebarItems"></p-panelMenu>-->
-<!--    </ng-template>-->
+    <ng-template pTemplate="header">
+      <h3 class="w-100 my-3 text-center">مدرسه من</h3>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <p-panelMenu [multiple]="false" [model]="sidebarItems"></p-panelMenu>
+    </ng-template>
   </p-sidebar>
 </div>
-
-<p-menu
-  #accountMenu
-  [baseZIndex]="1000"
-  [popup]="true"
-  [model]="accountItems"
-></p-menu>

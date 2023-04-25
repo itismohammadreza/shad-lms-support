@@ -7,8 +7,12 @@ import {HomeworkPage} from "@modules/main/pages/homework/homework.page";
 import {TutorialPage} from "@modules/main/pages/tutorial/tutorial.page";
 import {ProfilePage} from "@modules/main/pages/profile/profile.page";
 import {ProfileEditPage} from "@modules/main/pages/profile-edit/profile-edit.page";
-import {UsersPage} from "@modules/main/pages/users/users.page";
 import {UserDataGuard} from "@core/guard/user-data.guard";
+import {ActivityPage} from "@modules/main/pages/activity/activity.page";
+import {ExamDetailsPage} from "@modules/main/pages/exam-details/exam-details.page";
+import {HomeworkDetailsPage} from "@modules/main/pages/homework-details/homework-details.page";
+import {TutorialDetailsPage} from "@modules/main/pages/tutorial-details/tutorial-details.page";
+import {ActivityDetailsPage} from "@modules/main/pages/activity-details/activity-details.page";
 
 const routes: Routes = [
   {
@@ -23,18 +27,63 @@ const routes: Routes = [
       },
       {
         path: 'exam',
-        component: ExamPage,
-        title: 'داشبورد'
+        children: [
+          {
+            path: '',
+            component: ExamPage,
+            title: 'آزمون'
+          },
+          {
+            path: ':id',
+            component: ExamDetailsPage,
+            title: 'جزئیات آزمون'
+          },
+        ]
       },
       {
         path: 'homework',
-        component: HomeworkPage,
-        title: 'تکالیف'
+        children: [
+          {
+            path: '',
+            component: HomeworkPage,
+            title: 'تکلیف'
+          },
+          {
+            path: ':id',
+            component: HomeworkDetailsPage,
+            title: 'جزئیات تکلیف'
+          },
+        ]
       },
       {
         path: 'tutorial',
-        component: TutorialPage,
-        title: 'درسنامه'
+        children: [
+          {
+            path: '',
+            component: TutorialPage,
+            title: 'درسنامه'
+          },
+          {
+            path: ':id',
+            component: TutorialDetailsPage,
+            title: 'جزئیات درسنامه'
+          },
+        ]
+      },
+      {
+        path: 'activity',
+        children: [
+          {
+            path: '',
+            component: ActivityPage,
+            title: 'دفتر معلم'
+          },
+          {
+            path: ':id',
+            component: ActivityDetailsPage,
+            title: 'جزئیات دفتر معلم'
+          },
+        ]
       },
       {
         path: 'profile',
@@ -45,11 +94,6 @@ const routes: Routes = [
         path: 'profile-edit',
         component: ProfileEditPage,
         title: 'ویرایش پروفایل'
-      },
-      {
-        path: 'users',
-        component: UsersPage,
-        title: 'مدیریت کاربران'
       },
       {
         path: '',

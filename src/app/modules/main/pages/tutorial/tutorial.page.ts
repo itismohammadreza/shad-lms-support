@@ -10,96 +10,16 @@ import {UtilsService} from "@ng/services";
   styleUrls: ['./tutorial.page.scss']
 })
 export class TutorialPage implements OnInit {
-  stackedData = {
-    labels: ['تهران', 'اصفهان', 'شیراز', 'اردبیل', 'قم', 'تبریز', 'مشهد'],
-    datasets: [{
-      type: 'bar',
-      backgroundColor: '#42A5F5',
-      data: [
-        50,
-        25,
-        12,
-        48,
-        90,
-        76,
-        42
-      ]
-    }, {
-      type: 'bar',
-      backgroundColor: '#66BB6A',
-      data: [
-        21,
-        84,
-        24,
-        75,
-        37,
-        65,
-        34
-      ]
-    }, {
-      type: 'bar',
-      backgroundColor: '#FFA726',
-      data: [
-        41,
-        52,
-        24,
-        74,
-        23,
-        21,
-        32
-      ]
-    }]
-  };
-  stackedOptions = {
-    plugins: {
-      legend: {display: false},
-      tooltips: {
-        mode: 'index',
-        intersect: false
-      },
-      // legend: {
-      //   labels: {
-      //     color: '#495057'
-      //   }
-      // }
-    },
-    scales: {
-      x: {
-        stacked: false,
-        ticks: {
-          font: {family: 'IRANSans'},
-        },
-        // ticks: {
-        //   color: '#495057'
-        // },
-        // grid: {
-        //   color: '#ebedef'
-        // }
-      },
-      y: {
-        stacked: false,
-        ticks: {
-          font: {family: 'IRANSans'},
-        }
-        // ticks: {
-        //   color: '#495057'
-        // },
-        // grid: {
-        //   color: '#ebedef'
-        // }
-      }
-    }
-  };
   form = new FormGroup({
-    start_time: new FormControl(),
-    end_time: new FormControl(),
-    lesson_id: new FormControl(),
+    province_id: new FormControl(),
     major: new FormControl(),
-    stage: new FormControl(),
-    grade: new FormControl(),
+    school_type: new FormControl(),
+    school_id: new FormControl(),
     gender_id: new FormControl(),
-  }, this.bothDatesValidator);
-  gradeCount: GradeCount = {};
+    grade: new FormControl(),
+    stage: new FormControl(),
+    field: new FormControl(),
+  });
   count: TutorialCount = {};
   filterEnabled: boolean = false;
   genders = this.dataService.genders;
@@ -112,7 +32,6 @@ export class TutorialPage implements OnInit {
   }
 
   async loadData() {
-    this.gradeCount = await this.dataService.getGradeCount('Tutorial')
     this.count = await this.dataService.getTutorialCount()
   }
 
@@ -120,14 +39,6 @@ export class TutorialPage implements OnInit {
     this.count = await this.dataService.getTutorialCount();
     this.form.reset();
     this.filterEnabled = false;
-  }
-
-  bothDatesValidator(group: FormGroup) {
-    const start_time = group.get('start_time').value;
-    const end_time = group.get('end_time').value;
-    const bothFilled = !!start_time && !!end_time;
-    const bothEmpty = !start_time && !end_time;
-    return (bothFilled || bothEmpty) ? null : {invalidDate: true};
   }
 
   async onSubmitFilter() {

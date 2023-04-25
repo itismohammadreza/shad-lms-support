@@ -1,6 +1,8 @@
 import {AfterContentInit, AfterViewChecked, Component, HostListener, Inject, Input, OnInit} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 import {MenuItem} from "primeng/api";
+import {NavigationEnd, Router} from "@angular/router";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'ng-navbar-menu',
@@ -10,7 +12,7 @@ import {MenuItem} from "primeng/api";
 export class NavbarMenuComponent implements OnInit, AfterViewChecked, AfterContentInit {
   @Input() sidebarType = 'push-mask';
   @Input() sidebarVisible: boolean = true;
-  @Input() sidebarLock: boolean = true; // overrides the sidebarVisible.
+  @Input() sidebarLock: boolean = true;
   @Input() responsiveThreshold: number = 768;
 
   tempSidebarType: string;
@@ -19,15 +21,8 @@ export class NavbarMenuComponent implements OnInit, AfterViewChecked, AfterConte
     {label: 'آزمون', routerLink: '/exam', icon: ''},
     {label: 'تکالیف', routerLink: '/homework', icon: ''},
     {label: 'محتوای درسی', routerLink: '/activity', icon: ''},
-    {label: 'درسنامه', routerLink: 'tutorial', icon: ''},
-  ];
-  accountItems: MenuItem[] = [
-    {
-      label: 'خروج',
-      icon: 'pi pi-sign-out',
-      command: () => {
-      }
-    }
+    {label: 'درسنامه', routerLink: '/tutorial', icon: ''},
+    {label: '1.0.0'},
   ];
 
   @HostListener('window:resize', ['$event'])
@@ -42,7 +37,7 @@ export class NavbarMenuComponent implements OnInit, AfterViewChecked, AfterConte
     }
   }
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor(@Inject(DOCUMENT) private document: Document, private router: Router) {
   }
 
   ngOnInit() {
@@ -50,6 +45,9 @@ export class NavbarMenuComponent implements OnInit, AfterViewChecked, AfterConte
     if (this.sidebarLock && !this.sidebarVisible) {
       this.sidebarVisible = true;
     }
+    this.router.events.subscribe(res => {
+      console.log(res)
+    })
   }
 
   ngAfterViewChecked() {

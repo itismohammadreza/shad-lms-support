@@ -5,11 +5,11 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {UtilsService} from "@ng/services";
 
 @Component({
-  selector: 'ng-homework',
-  templateUrl: './homework.page.html',
-  styleUrls: ['./homework.page.scss']
+  selector: 'ng-activity',
+  templateUrl: './activity.page.html',
+  styleUrls: ['./activity.page.scss']
 })
-export class HomeworkPage implements OnInit {
+export class ActivityPage implements OnInit {
   form = new FormGroup({
     province_id: new FormControl(),
     major: new FormControl(),
@@ -32,11 +32,11 @@ export class HomeworkPage implements OnInit {
   }
 
   async loadData() {
-    this.count = await this.dataService.getHomeworkCount()
+    this.count = await this.dataService.getExamCount()
   }
 
   async clearFilter() {
-    this.count = await this.dataService.getHomeworkCount();
+    this.count = await this.dataService.getExamCount();
     this.form.reset();
     this.filterEnabled = false;
   }
@@ -46,7 +46,7 @@ export class HomeworkPage implements OnInit {
     if (!filters) {
       return;
     }
-    this.count = await this.dataService.getHomeworkCount(filters)
+    this.count = await this.dataService.getExamCount(filters)
     this.filterEnabled = true;
   }
 }

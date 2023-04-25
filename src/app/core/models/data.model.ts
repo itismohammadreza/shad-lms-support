@@ -29,14 +29,9 @@ export interface District {
   title: string;
 }
 
-export interface CountBar {
-  exams?: number;
-  homeworks?: number;
-  tutorials?: number;
-  teachers?: number;
-  students?: number;
-  boys?: number;
-  girls?: number;
+export interface Item {
+  id: string;
+  title: string;
 }
 
 export interface Usage {

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <p-card class="mb-3">
+    <h4>فیلتر</h4>
+    <form [formGroup]="form" class="row mt-4">
+      <ng-input-text formControlName="province_id" class="mt-2 col-sm-6 col-lg-3" label="استان"></ng-input-text>
+      <ng-input-text formControlName="major" class="mt-2 col-sm-6 col-lg-3" label="منطقه"></ng-input-text>
+      <ng-input-text formControlName="school_type" class="mt-2 col-sm-6 col-lg-3" label="نوع مدرسه"></ng-input-text>
+      <ng-input-text formControlName="school_id" class="mt-2 col-sm-6 col-lg-3" label="مدرسه"></ng-input-text>
+      <ng-input-text formControlName="gender_id" class="mt-2 col-sm-6 col-lg-3" label="جنسیت"></ng-input-text>
+      <ng-input-text formControlName="grade" class="mt-2 col-sm-6 col-lg-3" label="مقطع"></ng-input-text>
+      <ng-input-text formControlName="stage" class="mt-2 col-sm-6 col-lg-3" label="پایه"></ng-input-text>
+      <ng-input-text formControlName="field" class="mt-2 col-sm-6 col-lg-3" label="رشته"></ng-input-text>
+      <div class="mt-2 d-flex align-items-center col-sm-6 col-lg-3 mr-auto">
+        <ng-button [full]="true" label="اعمال"></ng-button>
+        <ng-button
+          *ngIf="filterEnabled"
+          appearance="outlined"
+          color="danger"
+          pTooltip="حذف فیلتر"
+          tooltipPosition="top"
+          class="mr-2"
+          size="md"
+          [rounded]="true"
+          icon="pi pi-times"
+          (onClick)="clearFilter()">
+        </ng-button>
+      </div>
+    </form>
+  </p-card>
+</div>

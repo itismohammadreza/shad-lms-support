@@ -1,20 +1,16 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from "@core/http/api.service";
 import {
-  CountBar,
-  CountBarFilter,
   District,
   EntityCountFilter,
   EntityType,
   ExamCount,
   GradeCount,
+  Item,
   Province,
   TutorialCount,
-  Usage,
-  UsageFilter,
   User
 } from "@core/models";
-import {map} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -79,16 +75,6 @@ export class DataService extends ApiService {
     return this._get<GradeCount>('object-count-per-grade', {params: {type}}).toPromise();
   }
 
-  getUsage(filter?: UsageFilter) {
-    return this._get<Usage>('lms-usage', {params: {...filter}}).pipe(map(res =>
-      ({...res, total: Object.values(res).reduce((acc, cur) => acc + cur, 0)})
-    )).toPromise();
-  }
-
-  getCountBar(filter?: CountBarFilter) {
-    return this._get<CountBar>('count-bar', {params: {...filter}}).toPromise();
-  }
-
   getExamCount(filter?: EntityCountFilter) {
     return this._get<ExamCount>('exam-count-page', {params: {...filter}}).toPromise();
   }
@@ -102,10 +88,18 @@ export class DataService extends ApiService {
   }
 
   getProvinces() {
-    return this._get<Province[]>('provinces', {params: {limit: 100, offset: 0}}).toPromise();
+    return this._get<Province[]>('provinces', {params: {limit: 50, offset: 0}}).toPromise();
   }
 
   getDistricts(provinceId: number) {
-    return this._get<District[]>('provinces', {params: {limit: 100, offset: 0, province_id: provinceId}}).toPromise();
+    return this._get<District[]>('provinces', {params: {limit: 50, offset: 0, province_id: provinceId}}).toPromise();
+  }
+
+  getFields() {
+    return this._get<Item[]>('fields').toPromise();
+  }
+
+  getGrades() {
+    return this._get<Item[]>('grades', {params: {limit: 50, offset: 0}}).toPromise();
   }
 }

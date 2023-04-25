@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ExamCount, GradeCount} from "@core/models";
-import {DataService} from "@core/http";
 import {FormControl, FormGroup} from "@angular/forms";
+import {DataService} from "@core/http";
 import {UtilsService} from "@ng/services";
 
 @Component({
-  selector: 'ng-homework',
-  templateUrl: './homework.page.html',
-  styleUrls: ['./homework.page.scss']
+  selector: 'ng-exam-details',
+  templateUrl: './exam-details.page.html',
+  styleUrls: ['./exam-details.page.scss']
 })
-export class HomeworkPage implements OnInit {
+export class ExamDetailsPage implements OnInit {
   form = new FormGroup({
     province_id: new FormControl(),
     major: new FormControl(),
@@ -20,9 +19,8 @@ export class HomeworkPage implements OnInit {
     stage: new FormControl(),
     field: new FormControl(),
   });
-  count: ExamCount = {};
   filterEnabled: boolean = false;
-  genders = this.dataService.genders;
+  count: any;
 
   constructor(private dataService: DataService, private utilsService: UtilsService) {
   }
@@ -32,11 +30,11 @@ export class HomeworkPage implements OnInit {
   }
 
   async loadData() {
-    this.count = await this.dataService.getHomeworkCount()
+    this.count = await this.dataService.getExamCount()
   }
 
   async clearFilter() {
-    this.count = await this.dataService.getHomeworkCount();
+    this.count = await this.dataService.getExamCount();
     this.form.reset();
     this.filterEnabled = false;
   }
@@ -46,7 +44,7 @@ export class HomeworkPage implements OnInit {
     if (!filters) {
       return;
     }
-    this.count = await this.dataService.getHomeworkCount(filters)
+    this.count = await this.dataService.getExamCount(filters)
     this.filterEnabled = true;
   }
 }
